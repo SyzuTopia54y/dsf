@@ -23,8 +23,7 @@ jobs:
 
       # --- Building and Testing ---
       - name: Build and Test with Gradle
-        run: ./gradlew build test
-
+        run: ./build_test.sh
       # --- Uploading Artifacts ---
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
