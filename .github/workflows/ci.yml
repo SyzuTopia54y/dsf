@@ -1,4 +1,4 @@
-name: CIgp
+name: CIgp  # CI with Gradle Pipeline
 
 on:
   push:
@@ -9,24 +9,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
+      - uses: actions/checkout@v2   # Check out your code
 
-      # --- Gradle Configuration ---
-      - name: Setup Gradle 6.7
+      # Setup Java JDK 11
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'   # Use Temurin distribution (AdoptOpenJDK)
+          java-version: 11          # Specific Java 11 version
+
+      # Setup Gradle 7.0
+      - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 6.7 
+          gradle-version: 7.0
 
-      # --- Building and Testing ---
+      # Execute Gradle build (customize this step)
       - name: Build and Test with Gradle
         run: ./build_test.sh
-      # --- Uploading Artifacts ---
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+
+      # Upload artifacts (customize file patterns if needed)
+      - uses: actions/upload-artifact@v3
         with:
-          name: server-jar  # More descriptive name
+          name: server-artifact
           path: server/build/libs/*.jar
