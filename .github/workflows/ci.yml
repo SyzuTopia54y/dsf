@@ -1,4 +1,4 @@
-name: CIg
+name: CIgp
 
 on: [push, pull_request]
 
